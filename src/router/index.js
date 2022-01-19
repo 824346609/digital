@@ -56,13 +56,8 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    name: 'digital',
     path: '/digital',
-    component: () => import('@/views/digital/index'),
-    hidden: true
-  },
-  {
-    name: 'digital-index',
-    path: '/digital-index',
     component: () => import('@/views/digital/test'),
     hidden: true
   },

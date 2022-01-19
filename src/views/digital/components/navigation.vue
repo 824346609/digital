@@ -13,12 +13,19 @@
       /></el-menu-item>
       <el-submenu index="1">
         <template slot="title" class="sub">集团概况</template>
-        <el-menu-item index="1-1">集团简介</el-menu-item>
+        <el-menu-item
+          v-for="(user, i) in listSub"
+          :key="i"
+          :index="`1-${user.id}`"
+          :class="`${user.class}`"
+          >{{ user.name }}</el-menu-item
+        >
+        <!-- <el-menu-item index="1-1" id="test">集团简介</el-menu-item>
         <el-menu-item index="1-2">领导班子</el-menu-item>
         <el-menu-item index="1-3">组织架构</el-menu-item>
         <el-menu-item index="1-4">荣誉资质</el-menu-item>
         <el-menu-item index="1-5">领导关怀</el-menu-item>
-        <el-menu-item index="1-6">领导大事记</el-menu-item>
+        <el-menu-item index="1-6">领导大事记</el-menu-item> -->
         <!-- <el-submenu index="1-4">
           <template slot="title">选项4</template>
           <el-menu-item index="1-4-1">选项1</el-menu-item>
@@ -34,7 +41,7 @@
       <el-menu-item index="7">搜索</el-menu-item>
     </el-menu>
   </div>
-  <div v-else>
+  <div :class="this.$route.name" v-else>
     <mNavi />
   </div>
 </template>
@@ -51,6 +58,14 @@ export default {
   data() {
     return {
       activeIndex: "1",
+      listSub: [
+        { id: 1, name: "集团简介", class: this.$route.name + '-one' },
+        { id: 2, name: "领导班子", class: this.$route.name + "-two" },
+        { id: 3, name: "组织架构", class: this.$route.name + "-three" },
+        { id: 4, name: "荣誉资质", class: this.$route.name + "-four" },
+        { id: 5, name: "领导关怀", class: this.$route.name + "-five" },
+        { id: 6, name: "领导大事记", class: this.$route.name + "-six" },
+      ],
     };
   },
   computed: {
@@ -66,19 +81,21 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+      console.log(this.listSub)
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+      console.log(this.listSub)
     },
     building() {
       const vm = this;
       vm.$router.push({ name: "build" });
-    },
+    }
   },
 };
 </script>
 <style scoped lang="scss">
-.digital-index {
+.digital {
   position: fixed;
   width: 100%;
   z-index: 99;
@@ -90,15 +107,40 @@ export default {
     color: white;
     font-size: 0.7rem;
     letter-spacing: 5px;
+    background-color: black;
+  }
+  .el-menu-item:hover,
+  .el-submenu:hover,
+  .el-menu--horizontal ::v-deep .el-submenu .el-submenu__title:hover,
+  .el-menu--horizontal > .el-menu-item,
+  .el-menu--horizontal > .el-menu-item:not(.is-disabled):hover,
+  .el-menu--horizontal > .el-menu-item:not(.is-disabled):focus {
+    background-color: black;
+    color: white;
+  }
+  .el-menu--horizontal .el-menu .el-menu-item,
+  .el-menu--horizontal .el-menu .el-submenu__title {
+    color: white !important;
+    background-color: transparent !important;
+  }
+  .el-menu.el-menu--horizontal {
+    border-bottom: unset;
+    background-color: white;
+  }
+  .el-menu.el-menu--horizontal {
+    border: none;
+    background-color: black;
   }
 }
+
+
 .logoBox {
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1 !important;
 }
-.digital-index-logo {
+.digital-logo {
   background: url("../../../assets/Logo.png");
   background-repeat: no-repeat;
   background-size: contain;
@@ -114,6 +156,13 @@ export default {
   width: 80%;
   height: 80%;
 }
+li[class*="digital-"] {
+  background: transparent !important;
+  color: white !important;
+}
+// li[class*="build-"] {
+//   color: black ;
+// }
 .el-menu.el-menu--horizontal {
   display: flex;
   flex-wrap: wrap;
@@ -132,19 +181,6 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.el-menu-item:hover,
-.el-submenu:hover,
-.el-menu--horizontal ::v-deep .el-submenu .el-submenu__title:hover,
-.el-menu--horizontal > .el-menu-item,
-.el-menu--horizontal > .el-menu-item:not(.is-disabled):hover,
-.el-menu--horizontal > .el-menu-item:not(.is-disabled):focus {
-  background-color: black;
-  color: white;
-}
-.el-menu.el-menu--horizontal {
-  border: none !important;
-  background-color: black;
-}
 .el-menu.el-menu--horizontal > li {
   height: 80px;
   color: white;
@@ -152,25 +188,21 @@ export default {
   letter-spacing: 5px;
   /* max-width: 130px; */
 }
-.el-menu--horizontal .el-menu .el-menu-item,
-.el-menu--horizontal .el-menu .el-submenu__title {
-  color: white !important;
-  background-color: transparent !important;
-}
+
+
 .build {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
   .el-submenu__title:hover {
     background-color: white;
     color: black;
   }
-    .el-submenu__title {
+  .el-submenu__title {
     background-color: black;
     color: black;
   }
-  .el-menu.el-menu--horizontal {
-    border: none !important;
-    background-color: white;
-  }
-  
+
   .el-menu.el-menu--horizontal > li {
     background-color: white;
     color: black;
@@ -194,14 +226,14 @@ export default {
     font-size: 0.7rem;
     letter-spacing: 5px;
   }
-  // .el-menu-item:hover,
-  // .el-submenu:hover,
-  // .el-menu--horizontal .el-submenu .el-submenu__title:hover,
-  // .el-menu--horizontal > .el-menu-item,
-  // .el-menu--horizontal > .el-menu-item:not(.is-disabled):hover,
-  // .el-menu--horizontal > .el-menu-item:not(.is-disabled):focus {
-  //   background-color: white;
-  //   color: black;
-  // }
+  .el-menu--horizontal .el-menu .el-menu-item,
+  .el-menu--horizontal .el-menu .el-submenu__title {
+    color: black !important;
+    background-color: transparent !important;
+  }
+  .el-menu.el-menu--horizontal {
+    border-bottom: 2px solid rgb(234, 234, 234);
+    background-color: black;
+  }
 }
 </style>

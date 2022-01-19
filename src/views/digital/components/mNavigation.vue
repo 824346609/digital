@@ -1,12 +1,11 @@
 <template>
-  <div :class="this.$route.name">
     <el-row class="tac">
       <el-col :span="24">
         <el-menu
           class="el-menu-vertical-demo"
-          text-color="#fff"
+          :text-color="this.$route.name === 'digital'? '#fff':'#000'"
           active-text-color="#ffd04b"
-          background-color="#000"
+          :background-color="this.$route.name === 'digital'? '#000':'#fff'"
           @open="handleOpen"
           @close="handleClose"
         >
@@ -21,6 +20,7 @@
                 v-for="(user, i) in listSub"
                 :key="i"
                 :index="`1-1-${user.id}`"
+                :class="`${user.class}`"
                 >{{ user.name }}</el-menu-item
               >
             </el-submenu>
@@ -36,7 +36,6 @@
         </el-menu>
       </el-col>
     </el-row>
-  </div>
 </template>
 
 <script>
@@ -52,13 +51,13 @@ export default {
         { id: 5, name: "联系我们", ref: "build" },
       ],
       listSub: [
-        { id: 1, name: "集团简介" },
-        { id: 2, name: "领导班子" },
-        { id: 3, name: "组织架构" },
-        { id: 4, name: "荣誉资质" },
-        { id: 5, name: "领导关怀" },
-        { id: 6, name: "领导大事记" },
-      ],
+        { id: 1, name: "集团简介", class: this.$route.name + '-one' },
+        { id: 2, name: "领导班子", class: this.$route.name + '-two' },
+        { id: 3, name: "组织架构", class: this.$route.name + '-three' },
+        { id: 4, name: "荣誉资质", class: this.$route.name + '-four' },
+        { id: 5, name: "领导关怀" , class: this.$route.name + '-five' },
+        { id: 6, name: "领导大事记", class: this.$route.name + '-six' },
+      ]
     };
   },
   methods: {
@@ -70,13 +69,13 @@ export default {
     },
     link(db) {
       const vm = this;
-      vm.$router.push({ name: db });
+      // vm.$router.push({ name: db });
     },
   },
 };
 </script>
-<style lang="scss" scoped>
-.digital-index {
+<style scoped lang="scss">
+.digital {
   .el-menu-item:hover, .el-menu-item:focus {
     background-color: unset;
     color: rgb(255, 208, 75);
@@ -94,7 +93,7 @@ export default {
     align-items: center;
   }
   .el-menu {
-    border-right: none !important;
+    border-right: unset;
     background-color: unset !important;
     padding: 0 20px;
     width: 100%;
@@ -118,5 +117,57 @@ export default {
     color: unset;
     background-color: unset;
   }
+}
+
+.build {
+  .el-submenu {
+    display: block !important;
+  }
+  .el-submenu ::v-deep .el-submenu__title {
+    background-color: white !important;
+  }
+  .is-active {
+    background-color: rgba(240, 240, 240, .3) !important;
+  }
+  // .el-menu-item:hover, .el-menu-item:focus {
+  //   background-color: unset;
+  //   color: rgb(255, 208, 75);
+  // }
+  // .el-submenu__title {
+  //   background-color: rgba(250, 250, 250, 1);
+  // }
+  // ::v-deep .el-submenu__title:hover {
+  //   background-color: rgba(250, 250, 250, 1);
+  // }
+  // .el-col {
+  //   background-color: rgba(250, 250, 250, 1);
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
+  // .el-menu {
+  //   border-right: unset;
+  //   background-color: rgba(250, 250, 250, 1);
+  //   width: 100%;
+  // }
+  // .menu {
+  //   width: 25%;
+  //   display: flex;
+  //   align-items: center;
+  // }
+  // .el-submenu__title {
+  //   padding: 0px !important;
+  // }
+  // .el-submenu {
+  //   display: block !important;
+  // }
+  // .el-submenu [class^="el-icon-"] {
+  //   margin-left: -5px;
+  //   text-align: unset;
+  // }
+  // .is-active {
+  //   color: unset;
+  //   background-color: rgba(250, 250, 250, 1);
+  // }
 }
 </style>

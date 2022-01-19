@@ -6,16 +6,16 @@
 
 <script>
 export default {
-  name: 'App'
-  // mounted() {
-  //   if (this._isMobile()) {
-  //     alert("手机端");
-  //     // this.$router.replace("/m_index");
-  //   } else {
-  //     alert("pc端");
-  //     // this.$router.replace("/pc_index");
-  //   }
-  // },
+  name: 'App',
+  mounted() {
+    // 页面开始加载时修改font-size
+    var html = document.getElementsByTagName('html')[0]
+    var oWidth = document.body.clientWidth || document.documentElement.clientWidth
+    html.style.fontSize = oWidth / 6000 * 100 + 'px'
+    console.log('oWidth:', oWidth)
+    console.log('rem:', html.style.fontSize)
+    console.log(this.$store.state)
+  },
   // methods: {
   //   //App.vue，判断是否为移动端
   //   _isMobile() {
