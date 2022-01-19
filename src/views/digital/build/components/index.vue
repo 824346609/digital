@@ -52,15 +52,43 @@
             :page-size="100"
             layout="total, sizes, prev, pager, next, jumper"
             :total="400"
-          > -->
+          > 
           </el-pagination>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {};
+import $ from "jquery";
+export default {
+  methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
+  },
+  data() {
+    return {
+      currentPage1: 5,
+      currentPage2: 5,
+      currentPage3: 5,
+      currentPage4: 4,
+    };
+  },
+  mounted() {
+    var next = $("<span>下一页</span>")
+    var prev = $("<span>上一页</span>")
+    $(".btn-next").children().remove()
+    $(".btn-prev").children().remove()
+    $(".btn-prev").append(prev)
+    $(".btn-next").append(next)
+    // $(".btn-next").css("background-color", "yellow");
+    // this.initSwiper();
+  },
+};
 </script>
 <style lang="scss" scoped>
 .build_container {
