@@ -65,6 +65,7 @@ export default {
 .loop_contain {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 .swiper-pagination-bullet {
   display: block;
@@ -96,4 +97,5 @@ export default {
   min-width:unset;
   width: 6rem;
 }
+
 </style>

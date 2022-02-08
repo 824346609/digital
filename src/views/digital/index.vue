@@ -60,4 +60,10 @@ export default {
   align-items: center;
   color: white;
 }
+.el-menu--popup {
+  padding: 0px;
+  background-color: rgba(255,255,255,.1);
+  min-width:unset;
+  width: 6rem;
+}
 </style>

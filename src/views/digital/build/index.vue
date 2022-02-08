@@ -4,20 +4,22 @@
       <div class="build_title"></div>
     </div>
     <div class="build_content">
-      <div class="build_artical">
-        <div class="block">
-          <span class="demonstration">显示总数</span>
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page.sync="currentPage1"
-            :page-size="100"
-            layout="prev, pager, next"
-            :total="1000"
-          >
-          </el-pagination>
-        </div>
-        <!-- <div class="block">
+      <art />
+  <div class="page">
+      <div class="block">
+        <span class="demonstration"></span>
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page.sync="currentPage1"
+          :page-size="200"
+          layout="prev, pager, next"
+          :total="1000"
+        >
+        </el-pagination>
+      </div>
+    </div>
+      <!-- <div class="block">
           <span class="demonstration">调整每页显示条数</span>
           <el-pagination
             @size-change="handleSizeChange"
@@ -55,13 +57,17 @@
           > 
           </el-pagination>
         </div> -->
-      </div>
     </div>
   </div>
 </template>
 <script>
 import $ from "jquery";
+import art from "./components/article.vue";
+
 export default {
+  components: {
+    art
+  },
   methods: {
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
@@ -72,19 +78,16 @@ export default {
   },
   data() {
     return {
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 4,
+      currentPage1: 5
     };
   },
   mounted() {
-    var next = $("<span>下一页</span>")
-    var prev = $("<span>上一页</span>")
-    $(".btn-next").children().remove()
-    $(".btn-prev").children().remove()
-    $(".btn-prev").append(prev)
-    $(".btn-next").append(next)
+    // var next = $("<span>下一页</span>")
+    // var prev = $("<span>上一页</span>")
+    // $(".btn-next").children().remove()
+    // $(".btn-prev").children().remove()
+    // $(".btn-prev").append(prev)
+    // $(".btn-next").append(next)
     // $(".btn-next").css("background-color", "yellow");
     // this.initSwiper();
   },
@@ -99,15 +102,14 @@ export default {
   position: relative;
   width: 100%;
   height: 40%;
-  background: url("../../../../assets/build/build_bg.png");
+  background: url("../../../assets/build/build_bg.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  top: 8%;
   border-bottom: 3px solid red;
 }
 .build_title {
   position: relative;
-  background: url("../../../../assets/build/build_tit.png");
+  background: url("../../../assets/build/build_tit.png");
   background-repeat: no-repeat;
   background-size: contain;
   width: 30%;
@@ -118,8 +120,15 @@ export default {
 .build_content {
   width: 100%;
   height: 52%;
-  background-color: black;
   position: relative;
-  top: 8%;
+}
+@media screen and (max-width: 992px) {
+  .build_bg {
+    top: 5.5%;
+  }
+}
+.page {
+  display: flex;
+  justify-content: center;
 }
 </style>

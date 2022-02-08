@@ -58,13 +58,25 @@ export const constantRoutes = [
   {
     name: 'digital',
     path: '/digital',
-    component: () => import('@/views/digital/test'),
+    component: () => import('@/views/digital/digital'),
+    hidden: true
+  },
+  {
+    name: 'test',
+    path: '/test',
+    component: () => import('@/views/digital/test/test'),
     hidden: true
   },
   {
     name: 'build',
     path: '/build',
     component: () => import('@/views/digital/build/build-container'),
+    hidden: true
+  },
+  {
+    name: 'more',
+    path: '/more',
+    component: () => import('@/views/digital/build/more'),
     hidden: true
   },
   {

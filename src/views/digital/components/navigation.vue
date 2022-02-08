@@ -1,6 +1,10 @@
 <template>
   <!-- <div  :class="[{'navi':this.$route.name =='test'}]" v-if="device!=='mobile'"> -->
-  <div v-if="device !== 'mobile'" :class="this.$route.name">
+    <div class="nav_container">
+  <div v-if="device !== 'mobile'" 
+  :text-color="this.$route.name === 'digital'? '#fff':'#000'"
+  :class="this.$route.name === 'digital' ? 'digital': this.$route.name + ' totalNav'"
+  >
     <el-menu
       :default-active="activeIndex"
       class="el-menu-demo"
@@ -9,7 +13,7 @@
       @close="handleClose"
     >
       <el-menu-item index="0" class="logoBox"
-        ><div :class="this.$route.name + '-logo'"
+        ><div :class="this.$route.name + '-logo' + ' total-logo'"
       /></el-menu-item>
       <el-submenu index="1">
         <template slot="title" class="sub">集团概况</template>
@@ -44,6 +48,7 @@
   <div :class="this.$route.name" v-else>
     <mNavi />
   </div>
+  </div>
 </template>
 
 <script>
@@ -67,6 +72,12 @@ export default {
         { id: 6, name: "领导大事记", class: this.$route.name + "-six" },
       ],
     };
+  },
+  mounted() {
+    // 页面开始加载时修改font-size
+    var html = document.getElementsByTagName('html')[0]
+    var oWidth = document.body.clientWidth || document.documentElement.clientWidth
+    html.style.fontSize = oWidth / 6000 * 100 + 'px'
   },
   computed: {
     ...mapState({
@@ -95,6 +106,13 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.nav_container {
+  height: 80px;
+  width: 100%;
+}
+.totalNav {
+  box-shadow: 5px 5px 20px 5px rgba(200,200,200,20%);
+}
 .digital {
   position: fixed;
   width: 100%;
@@ -148,7 +166,7 @@ export default {
   width: 80%;
   height: 80%;
 }
-.build-logo {
+.build-logo, .total-logo {
   background: url("../../../assets/bLogo.png");
   background-repeat: no-repeat;
   background-size: contain;
@@ -190,7 +208,7 @@ li[class*="digital-"] {
 }
 
 
-.build {
+.build, .totalNav {
   position: fixed;
   width: 100%;
   z-index: 99;
@@ -231,9 +249,9 @@ li[class*="digital-"] {
     color: black !important;
     background-color: transparent !important;
   }
-  .el-menu.el-menu--horizontal {
-    border-bottom: 2px solid rgb(234, 234, 234);
-    background-color: black;
-  }
+  // .el-menu.el-menu--horizontal {
+  //   border-bottom: 2px solid rgb(234, 234, 234);
+    
+  // }
 }
 </style>

@@ -21,17 +21,43 @@ import Swiper from "swiper";
 
 export default {
   components: {
-    componentOne: () => import("./components/index.vue"),
-    // componentTwo: () => import('./2.vue'),
-    // componentThree: () => import('./3.vue'),
-    Navi,
+    componentOne: () => import('./index.vue'),
+    componentTwo: () => import('./more.vue'),
+    Navi
   },
   data() {
     return {
       activeIndex: "1",
-      componentList: ["componentOne"],
+      componentList: [
+        "componentOne",
+        "componentTwo"
+      ],
     };
   },
+  mounted() {
+    this.initSwiper()
+  },
+  methods: {
+    initSwiper() {
+      var mySwiper = new Swiper('.swiper-container', {
+        centeredSlides: true,
+        initialSlide: 0, // 设定初始化时slide的索引
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        }, // 这样写小圆点就有了
+        direction: 'vertical', // 水平(horizontal)或垂直(vertical)
+        watchOverflow: true, // 因为仅有1个slide，swiper无效
+        scrollbar: {
+          el: '.swiper-scrollbar' // 自动隐藏
+        },
+        preventClicks: false // 当swiper在触摸时阻止默认事件（preventDefault），用于防止触摸时触发链接跳转。
+      })
+      mySwiper.on('slideChange', () => {
+        // this.swiperContainer.activeIndex; 当前切换的组件索引index
+      })
+    }
+  }
 };
 </script>
 
@@ -45,6 +71,7 @@ export default {
 .loop_contain {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 .swiper-pagination-bullet {
   display: block;
@@ -68,6 +95,6 @@ export default {
 .swiper-pagination-bullet-active {
   width: 20px;
   height: 20px;
-  background-color: rgba(255, 255, 255, 0.5) !important;
+  background-color: rgba(1, 2, 6, .5) !important;
 }
 </style>
