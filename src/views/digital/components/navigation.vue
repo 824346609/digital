@@ -37,7 +37,7 @@
           <el-menu-item index="1-4-3">选项3</el-menu-item>
         </el-submenu> -->
       </el-submenu>
-      <el-menu-item index="2">新闻中心</el-menu-item>
+      <el-menu-item index="2" @click="news">新闻中心</el-menu-item>
       <el-menu-item index="3" @click="building">企业党建</el-menu-item>
       <el-menu-item index="4">招贤纳士</el-menu-item>
       <el-menu-item index="5">核心业务</el-menu-item>
@@ -101,6 +101,10 @@ export default {
     building() {
       const vm = this;
       vm.$router.push({ name: "build" });
+    },
+    news() {
+      const vm = this;
+      vm.$router.push({ name: "news" });
     }
   },
 };

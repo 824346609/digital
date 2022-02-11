@@ -122,11 +122,11 @@ export default {
   height: 52%;
   position: relative;
 }
-@media screen and (max-width: 992px) {
-  .build_bg {
-    top: 5.5%;
-  }
-}
+// @media screen and (max-width: 992px) {
+//   .build_bg {
+//     top: 5.5%;
+//   }
+// }
 .page {
   display: flex;
   justify-content: center;

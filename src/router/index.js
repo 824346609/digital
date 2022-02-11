@@ -68,9 +68,15 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    name: 'news',
+    path: '/news',
+    component: () => import('@/views/digital/news/news_container'),
+    hidden: true
+  },
+  {
     name: 'build',
     path: '/build',
-    component: () => import('@/views/digital/build/build-container'),
+    component: () => import('@/views/digital/build/build_container'),
     hidden: true
   },
   {
